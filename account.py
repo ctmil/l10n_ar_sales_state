@@ -7,12 +7,12 @@ class account_invoice(osv.osv):
     _description = "State Report"
     _auto = False
     _columns = {
-	'company_id': fields.many2one('account.journal','Journal Name'),
-	'period_id': fields.many2one('account.journal','Journal Name'),
+	'company_id': fields.many2one('account.journal','Company'),
+	'period_id': fields.many2one('account.journal','Period'),
 	'journal_id': fields.many2one('account.journal','Journal Name'),
 	'state_id': fields.many2one('res.country.state','State'),
-	'base_amount': fields.float('Base Amount',readonly=True,group_operator="sum",digits=(16,2)),
 	'amount_total': fields.float('Total Amount',readonly=True,group_operator="sum",digits=(16,2)),
+	'amount_untaxed': fields.float('Base Amount',readonly=True,group_operator="sum",digits=(16,2)),
 	}
  
     def init(self, cr):
@@ -23,7 +23,7 @@ class account_invoice(osv.osv):
 					sum(a.amount_untaxed) as amount_untaxed 
 					from account_invoice a inner join res_partner b on a.partner_id = b.id 
 					where a.state in ('open','paid') and a.type in ('out_invoice','out_refund') 
-					group by 1,2,3,4
+					group by 1,2,3,4,5
 				)
 	""")	
  

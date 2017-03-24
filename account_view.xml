@@ -3,18 +3,18 @@
     <data>
 
 
-    <record model ="ir.ui.view" id="view_state_report_tree">
-        <field name="name">state.report.tree</field>
+    <record model ="ir.ui.view" id="view_state_report_graph">
+        <field name="name">state.report.graph</field>
         <field name="model">account.state.report</field>
         <field name="arch" type="xml">
-		<tree string="State Report" >
-	              <field name="company_id" />
-	              <field name="journal_id" />
-	              <field name="period_id" />
-	              <field name="state_id" />
-	              <field name="base_amount" sum="Monto Neto"/>
-	              <field name="amount_total" sum="Monto"/>
-		</tree>
+		<graph string="State Report" type="pivot">
+	              <field name="company_id" type="col"/>
+	              <field name="journal_id" type="row"/>
+	              <field name="period_id" type="row"/>
+	              <field name="state_id" type="row"/>
+	              <field name="amount_untaxed" type="measure"/>
+	              <field name="amount_total" type="measure"/>
+		</graph>
 	</field>
     </record>
 
@@ -23,9 +23,9 @@
         <field name="name">VAT Report View</field>
         <field name="res_model">account.state.report</field>
         <field name="view_type">form</field>
-        <field name="view_mode">tree</field>
+        <field name="view_mode">graph</field>
         <!-- field name="context">{'search_default_year':1,'search_default_month':1,'group_by':[]}</field -->
-        <field name="view_id" ref="view_state_report_tree" />
+        <field name="view_id" ref="view_state_report_graph" />
         <!-- field name="search_view_id" ref="view_vat_report_filter" / -->
     </record>
 
