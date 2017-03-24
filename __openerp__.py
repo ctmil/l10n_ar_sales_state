@@ -29,7 +29,9 @@
     'images': [],
     'depends': ['account','l10n_ar_invoice'],
     'demo': [],
-    'data': ['account_view.xml'],
+    'data': ['account_view.xml',
+	'security/ir.model.access.csv'
+	],
     'test': [],
     'installable': True,
 }
