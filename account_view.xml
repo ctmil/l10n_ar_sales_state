@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+
+    <record model ="ir.ui.view" id="view_state_report_tree">
+        <field name="name">state.report.tree</field>
+        <field name="model">account.state.report</field>
+        <field name="arch" type="xml">
+		<tree string="State Report" >
+	              <field name="company_id" />
+	              <field name="journal_id" />
+	              <field name="period_id" />
+	              <field name="state_id" />
+	              <field name="base_amount" sum="Monto Neto"/>
+	              <field name="amount_total" sum="Monto"/>
+		</tree>
+	</field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="action_state_reportview">
+        <field name="name">VAT Report View</field>
+        <field name="res_model">account.state.report</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree</field>
+        <!-- field name="context">{'search_default_year':1,'search_default_month':1,'group_by':[]}</field -->
+        <field name="view_id" ref="view_state_report_tree" />
+        <!-- field name="search_view_id" ref="view_vat_report_filter" / -->
+    </record>
+
+
+    <menuitem
+            id="menu_state_report"
+            name="Facturación por Provincias"
+            parent="account.menu_finance_generic_reporting" sequence="5"
+	    action="action_state_reportview"	/>
+    <!-- menuitem
+            id="menu_vat_report"
+            name="VAT Report"
+            groups="account.group_account_user,account.group_account_manager"
+            parent="account.menu_finance_generic_reporting" sequence="4"/ -->
+
+   </data>
+</openerp>
